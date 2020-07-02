@@ -1,3 +1,5 @@
+![Work in progress](https://www.animatedimages.org/data/media/1664/animated-work-in-progress-image-0020.gif)
+
 # ObjectControls
 
 ObjectControls is a variation of the original TransformControls from three.js. Heavily opinionated, simplified, focusing on readability and looking nice in more casual apps.
