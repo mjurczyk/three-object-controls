@@ -1,5 +1,3 @@
-import * as Three from 'three';
-
 export const TransformControlsMode = {
   translate: 'translate',
   elevate: 'elevate',
@@ -29,47 +27,47 @@ const MouseDownEvent = { type: 'mouseDown' };
 const MouseUpEvent = { type: 'mouseUp' };
 const ObjectChangeEvent = { type: 'objectChange' };
 
-export class TransformControls extends Three.Object3D {
+export class TransformControls extends THREE.Object3D {
   isTransformControls = true;
 
   visible = false;
   domElement = null;
 
-  ray = new Three.Raycaster();
-  _tempVector = new Three.Vector3();
-  _tempQuaterion = new Three.Quaternion();
+  ray = new THREE.Raycaster();
+  _tempVector = new THREE.Vector3();
+  _tempQuaterion = new THREE.Quaternion();
 
-  pointStart = new Three.Vector3();
-	pointEnd = new Three.Vector3();
-	offset = new Three.Vector3();
-	rotationAxis = new Three.Vector3();
+  pointStart = new THREE.Vector3();
+	pointEnd = new THREE.Vector3();
+	offset = new THREE.Vector3();
+	rotationAxis = new THREE.Vector3();
 	rotationAngle = 0;
 
-	cameraPosition = new Three.Vector3();
-	cameraQuaternion = new Three.Quaternion();
-	cameraScale = new Three.Vector3();
+	cameraPosition = new THREE.Vector3();
+	cameraQuaternion = new THREE.Quaternion();
+	cameraScale = new THREE.Vector3();
 
-	parentPosition = new Three.Vector3();
-	parentQuaternion = new Three.Quaternion();
-	parentQuaternionInv = new Three.Quaternion();
-	parentScale = new Three.Vector3();
+	parentPosition = new THREE.Vector3();
+	parentQuaternion = new THREE.Quaternion();
+	parentQuaternionInv = new THREE.Quaternion();
+	parentScale = new THREE.Vector3();
 
-	worldPositionStart = new Three.Vector3();
-	worldQuaternionStart = new Three.Quaternion();
-	worldScaleStart = new Three.Vector3();
+	worldPositionStart = new THREE.Vector3();
+	worldQuaternionStart = new THREE.Quaternion();
+	worldScaleStart = new THREE.Vector3();
 
-	worldPosition = new Three.Vector3();
-	worldQuaternion = new Three.Quaternion();
-	worldQuaternionInv = new Three.Quaternion();
-	worldScale = new Three.Vector3();
+	worldPosition = new THREE.Vector3();
+	worldQuaternion = new THREE.Quaternion();
+	worldQuaternionInv = new THREE.Quaternion();
+	worldScale = new THREE.Vector3();
 
-  eye = new Three.Vector3();
+  eye = new THREE.Vector3();
   controlPlane = new TransformControlsPlane();
   controlGizmo = new TransformControlsGizmo();
 
-	positionStart = new Three.Vector3();
-	quaternionStart = new Three.Quaternion();
-	scaleStart = new Three.Vector3();
+	positionStart = new THREE.Vector3();
+	quaternionStart = new THREE.Quaternion();
+	scaleStart = new THREE.Vector3();
 
   constructor(camera, domElement = document, options = DefaultOptions) {
     super();
@@ -202,7 +200,7 @@ export class TransformControls extends Three.Object3D {
 
     this.eye.copy(this.cameraPosition).sub(this.worldPosition).normalize();
 
-    Three.Object3D.prototype.updateMatrixWorld.call(this);
+    THREE.Object3D.prototype.updateMatrixWorld.call(this);
   }
 
   pointerHover(pointer) {
@@ -439,24 +437,24 @@ export class TransformControls extends Three.Object3D {
   update() { /* legacy */ }
 }
 
-class TransformControlsPlane extends Three.Mesh {
+class TransformControlsPlane extends THREE.Mesh {
   isTransformControlsPlane = true;
   type = 'TransformControlsPlane';
 
-  unitX = new Three.Vector3( 1, 0, 0 );
-	unitY = new Three.Vector3( 0, 1, 0 );
-	unitZ = new Three.Vector3( 0, 0, 1 );
+  unitX = new THREE.Vector3( 1, 0, 0 );
+	unitY = new THREE.Vector3( 0, 1, 0 );
+	unitZ = new THREE.Vector3( 0, 0, 1 );
 
-	tempVector = new Three.Vector3();
-	dirVector = new Three.Vector3();
-	alignVector = new Three.Vector3();
-	tempMatrix = new Three.Matrix4();
-	identityQuaternion = new Three.Quaternion();
+	tempVector = new THREE.Vector3();
+	dirVector = new THREE.Vector3();
+	alignVector = new THREE.Vector3();
+	tempMatrix = new THREE.Matrix4();
+	identityQuaternion = new THREE.Quaternion();
 
   constructor() {
     super(
-      new Three.PlaneBufferGeometry(100000, 100000, 2, 2),
-      new Three.MeshBasicMaterial({ visible: false, side: Three.DoubleSide, transparent: true, opacity: 0 }),
+      new THREE.PlaneBufferGeometry(100000, 100000, 2, 2),
+      new THREE.MeshBasicMaterial({ visible: false, side: THREE.DoubleSide, transparent: true, opacity: 0 }),
     );
   }
 
@@ -485,21 +483,21 @@ class TransformControlsPlane extends Three.Mesh {
       this.quaternion.setFromRotationMatrix(this.tempMatrix);
     }
 
-    Three.Object3D.prototype.updateMatrixWorld.call(this);
+    THREE.Object3D.prototype.updateMatrixWorld.call(this);
   }
 }
 
-class TransformControlsGizmo extends Three.Object3D {
+class TransformControlsGizmo extends THREE.Object3D {
   isTransformControlsGizmo = true;
   type = 'TransformControlsGizmo';
 
   picker = null;
-  gizmo = new Three.Object3D();
+  gizmo = new THREE.Object3D();
   gizmoTranslate = null;
   gizmoElevate = null;
   gizmoRotate = null;
-  identityQuaternion = new Three.Quaternion();
-  objectBoundingBox = new Three.Box3();
+  identityQuaternion = new THREE.Quaternion();
+  objectBoundingBox = new THREE.Box3();
 
   baseMaterialConfig = {
     color: 0x000000,
@@ -518,9 +516,9 @@ class TransformControlsGizmo extends Three.Object3D {
   }
 
   init() {
-    this.picker = new Three.Mesh(
-      new Three.SphereBufferGeometry(1, 8, 8),
-      new Three.MeshBasicMaterial({ visible: false, side: Three.DoubleSide, transparent: true, opacity: 0 }),
+    this.picker = new THREE.Mesh(
+      new THREE.SphereBufferGeometry(1, 8, 8),
+      new THREE.MeshBasicMaterial({ visible: false, side: THREE.DoubleSide, transparent: true, opacity: 0 }),
     );
     this.gizmo.add(this.getTranslateGizmoMesh());
     this.gizmo.add(this.getElevateGizmoMesh());
@@ -532,7 +530,7 @@ class TransformControlsGizmo extends Three.Object3D {
 
   getObjectSize() {
     if (!this.object) {
-      return new Three.Vector3(1, 1, 1);
+      return new THREE.Vector3(1, 1, 1);
     }
 
     this.objectBoundingBox.setFromObject(this.object);
@@ -541,15 +539,15 @@ class TransformControlsGizmo extends Three.Object3D {
   getTranslateGizmoMesh() {
     const { translateArrowStyle, translateArrowColor, physicalGizmo } = this.options;
 
-    const gizmo = new Three.Object3D();
+    const gizmo = new THREE.Object3D();
 
-    const material = new Three.MeshStandardMaterial({
+    const material = new THREE.MeshStandardMaterial({
       ...this.baseMaterialConfig,
       color: translateArrowColor,
       depthTest: !!physicalGizmo,
     });
 
-    const mesh = new Three.Mesh(
+    const mesh = new THREE.Mesh(
       this.getArrowGeometry(2, translateArrowStyle === TransformControlsArrowStyle.caret),
       material
     );
@@ -571,15 +569,15 @@ class TransformControlsGizmo extends Three.Object3D {
   getElevateGizmoMesh() {
     const { elevateArrowColor, physicalGizmo } = this.options;
 
-    const gizmo = new Three.Object3D();
+    const gizmo = new THREE.Object3D();
 
-    const material = new Three.MeshStandardMaterial({
+    const material = new THREE.MeshStandardMaterial({
       ...this.baseMaterialConfig,
       color: elevateArrowColor,
       depthTest: !!physicalGizmo,
     });
 
-    const mesh = new Three.Mesh(
+    const mesh = new THREE.Mesh(
       this.getArrowGeometry(2, false),
       material
     );
@@ -598,22 +596,22 @@ class TransformControlsGizmo extends Three.Object3D {
   getRotateGizmoMesh() {
     const { rotateArrowColor } = this.options;
 
-    const gizmo = new Three.Object3D();
+    const gizmo = new THREE.Object3D();
 
-    const material = new Three.MeshStandardMaterial({
+    const material = new THREE.MeshStandardMaterial({
       ...this.baseMaterialConfig,
       color: rotateArrowColor,
     });
 
     const curveThickness = .25;
-    const curveAngleOffset = Three.MathUtils.degToRad(70);
+    const curveAngleOffset = THREE.MathUtils.degToRad(70);
 
-    const curveShape = new Three.Shape();
+    const curveShape = new THREE.Shape();
     curveShape.moveTo(-.5, 0);
     curveShape.absarc(0, 0, 1, Math.PI + curveAngleOffset, Math.PI * 2, true);
     curveShape.absarc(0, 0, 1 - curveThickness, Math.PI * 2, Math.PI + curveAngleOffset);
 
-    const curveMesh = new Three.Mesh(new Three.ExtrudeBufferGeometry(curveShape, {
+    const curveMesh = new THREE.Mesh(new THREE.ExtrudeBufferGeometry(curveShape, {
         bevelEnabled: false,
         steps: 1,
         curveSegments: 24,
@@ -624,7 +622,7 @@ class TransformControlsGizmo extends Three.Object3D {
     curveMesh.rotateX(-Math.PI / 2);
     curveMesh.scale.setScalar(4);
 
-    const arrowMesh = new Three.Mesh(this.getArrowGeometry(2, true), material);
+    const arrowMesh = new THREE.Mesh(this.getArrowGeometry(2, true), material);
     arrowMesh.translateX((1.5 - curveThickness) * 2 + 1);
     arrowMesh.translateY(1);
     arrowMesh.rotateX(-Math.PI / 2);
@@ -644,7 +642,7 @@ class TransformControlsGizmo extends Three.Object3D {
     const arrowTipOffsetY = .7;
     const arrowDepth = .25;
 
-    const shape = new Three.Shape();
+    const shape = new THREE.Shape();
 
     if (hollow) {
       shape.moveTo(-.5, 0);
@@ -662,7 +660,7 @@ class TransformControlsGizmo extends Three.Object3D {
       shape.lineTo(-arrowTipOffsetX, 0);
     }
 
-    return new Three.ExtrudeBufferGeometry(shape, {
+    return new THREE.ExtrudeBufferGeometry(shape, {
       bevelEnabled: false,
       steps: 1,
       depth: arrowDepth
@@ -681,8 +679,12 @@ class TransformControlsGizmo extends Three.Object3D {
     if (this.object) {
       this.getObjectSize();
 
-      const objectPosition = this.objectBoundingBox.getCenter();
-      const objectSize = this.objectBoundingBox.getSize();
+      const objectPosition = new THREE.Vector3();
+      const objectSize = new THREE.Vector3();
+
+      this.objectBoundingBox.getCenter(objectPosition);
+      this.objectBoundingBox.getSize(objectSize);
+
       const objectMaxOffsetXZ = Math.max(objectSize.x, objectSize.z);
       const objectMaxOffsetXYZ = Math.max(objectSize.x, objectSize.y, objectSize.z);
 
@@ -693,7 +695,7 @@ class TransformControlsGizmo extends Three.Object3D {
 
       if (this.translateArrowStyle === TransformControlsArrowStyle.caret) {
         this.gizmoTranslate.children.forEach(directionArrow => {
-          const directionVector = new Three.Vector3();
+          const directionVector = new THREE.Vector3();
           directionArrow.getWorldDirection(directionVector);
 
           directionArrow.position.setScalar(0);
@@ -706,9 +708,9 @@ class TransformControlsGizmo extends Three.Object3D {
       this.picker.scale.set(2, 2, 2);
     }
 
-    this.picker.scale.max(new Three.Vector3().setScalar(10));
+    this.picker.scale.max(new THREE.Vector3().setScalar(10));
     this.picker.quaternion.copy(quaternion);
 
-    Three.Object3D.prototype.updateMatrixWorld.call(this);
+    THREE.Object3D.prototype.updateMatrixWorld.call(this);
   }
 }
